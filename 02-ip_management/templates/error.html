@@ -1,0 +1,27 @@
+'TEMPLATE_EOF'
+{% extends "base.html" %}
+
+{% block title %}Error - IP Management System{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <div class="py-5">
+                <i class="bi bi-exclamation-triangle display-1 text-danger"></i>
+                <h1 class="h2 mt-4">Oops! Something went wrong</h1>
+                <p class="text-muted mt-3">{{ error }}</p>
+                <div class="mt-4">
+                    <a href="/" class="btn btn-primary">
+                        <i class="bi bi-house"></i> Go to Dashboard
+                    </a>
+                    <a href="javascript:history.back()" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Go Back
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+TEMPLATE_EOF

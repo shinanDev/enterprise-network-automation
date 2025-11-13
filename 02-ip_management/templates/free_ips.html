@@ -1,0 +1,156 @@
+'TEMPLATE_EOF'
+{% extends "base.html" %}
+
+{% block title %}Free IPs - IP Management System{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="h2">
+                <i class="bi bi-search"></i> Free IP Address Finder
+            </h1>
+            <p class="text-muted">Find available IP addresses in your VLANs</p>
+        </div>
+    </div>
+
+    <!-- Search Form -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="bi bi-funnel"></i> Search Parameters
+        </div>
+        <div class="card-body">
+            <form method="GET" action="/free-ips">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="site" class="form-label">Site</label>
+                        <select name="site" id="site" class="form-select">
+                            {% for site in sites %}
+                            <option value="{{ site }}" {% if current_site == site %}selected{% endif %}>
+                                {{ site|upper }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="vlan" class="form-label">VLAN</label>
+                        <select name="vlan" id="vlan" class="form-select">
+                            <option value="select">Select VLAN...</option>
+                            {% for vlan in vlans %}
+                            <option value="{{ vlan.id }}" {% if current_vlan == vlan.id|string %}selected{% endif %}>
+                                VLAN {{ vlan.id }} - {{ vlan.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-search"></i> Find Free IPs
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- VLAN Info -->
+    {% if vlan_info %}
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="bi bi-info-circle"></i> VLAN Information
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>VLAN ID:</strong>
+                    <p class="text-muted">{{ vlan_info.id }}</p>
+                </div>
+                <div class="col-md-3">
+                    <strong>Name:</strong>
+                    <p class="text-muted">{{ vlan_info.name }}</p>
+                </div>
+                <div class="col-md-3">
+                    <strong>Subnet:</strong>
+                    <p class="text-muted ip-address">{{ vlan_info.subnet }}</p>
+                </div>
+                <div class="col-md-3">
+                    <strong>Gateway:</strong>
+                    <p class="text-muted ip-address">{{ vlan_info.gateway }}</p>
+                </div>
+            </div>
+            {% if vlan_info.dhcp_pool %}
+            <div class="alert alert-info mt-3">
+                <i class="bi bi-info-circle"></i>
+                <strong>DHCP Pool:</strong> {{ vlan_info.dhcp_pool.start }} - {{ vlan_info.dhcp_pool.end }}
+                <br><small>These IPs are reserved for DHCP and not available for static assignment</small>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Results -->
+    {% if free_ips %}
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <span><i class="bi bi-check-circle"></i> Available IP Addresses</span>
+            <span class="badge bg-success">{{ free_ips|length }} IPs available</span>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-success">
+                <i class="bi bi-check-circle"></i>
+                Found <strong>{{ free_ips|length }}</strong> available IP addresses in 
+                {{ current_site|upper }} VLAN {{ current_vlan }}
+            </div>
+            
+            <!-- IP Address Grid -->
+            <div class="row">
+                {% for ip in free_ips[:50] %}
+                <div class="col-md-3 col-sm-4 col-6 mb-2">
+                    <div class="p-2 border rounded bg-light ip-address">
+                        {{ ip }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            {% if free_ips|length > 50 %}
+            <div class="alert alert-info mt-3">
+                <i class="bi bi-info-circle"></i>
+                Showing first 50 of {{ free_ips|length }} available IPs. 
+                Export full list via API: 
+                <code>/api/free-ips/{{ current_site }}/{{ current_vlan }}</code>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% elif current_vlan and current_vlan != 'select' %}
+    <div class="card">
+        <div class="card-body text-center py-5">
+            <i class="bi bi-exclamation-triangle display-1 text-warning"></i>
+            <p class="text-muted mt-3">No free IP addresses available in this VLAN</p>
+        </div>
+    </div>
+    {% else %}
+    <div class="card">
+        <div class="card-body text-center py-5">
+            <i class="bi bi-search display-1 text-muted"></i>
+            <p class="text-muted mt-3">Select a site and VLAN to find free IP addresses</p>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Auto-refresh VLANs when site changes
+    document.getElementById('site').addEventListener('change', function() {
+        this.form.submit();
+    });
+</script>
+{% endblock %}
+TEMPLATE_EOF

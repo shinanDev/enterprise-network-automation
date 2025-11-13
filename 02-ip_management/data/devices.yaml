@@ -1,0 +1,504 @@
+# Enterprise Network Automation Suite - Device Inventory
+# Domain: onprem.local
+
+sites:
+  hq:
+    name: "Headquarters"
+    location: "onprem.local"
+    description: "Main office with all core services"
+
+    vlans:
+      - id: 10
+        name: "Hypervisors"
+        subnet: "10.10.10.0/24"
+        gateway: "10.10.10.1"
+        description: "VMware/Hyper-V Hosts"
+
+      - id: 20
+        name: "VMs"
+        subnet: "10.10.20.0/24"
+        gateway: "10.10.20.1"
+        description: "Virtual Machine Network (Servers)"
+
+      - id: 30
+        name: "Backup"
+        subnet: "10.10.30.0/24"
+        gateway: "10.10.30.1"
+        description: "Backup Infrastructure"
+
+      - id: 40
+        name: "Management"
+        subnet: "10.10.40.0/24"
+        gateway: "10.10.40.1"
+        description: "Network Management"
+
+      - id: 50
+        name: "Clients"
+        subnet: "10.10.50.0/24"
+        gateway: "10.10.50.1"
+        description: "Client PCs and Printers"
+        dhcp_pool:
+          start: "10.10.50.50"
+          end: "10.10.50.150"
+
+    devices:
+      # VLAN 10 - Hypervisors
+      - name: "HYV-01"
+        type: "hypervisor"
+        vlan: 10
+        ip: "10.10.10.198"
+        port: "Fa0/2"
+        switch: "SW-01"
+        status: "active"
+        description: "Primary Hypervisor Host"
+
+      - name: "HYV-02"
+        type: "hypervisor"
+        vlan: 10
+        ip: "10.10.10.199"
+        port: "Fa0/3"
+        switch: "SW-01"
+        status: "active"
+        description: "Secondary Hypervisor Host"
+
+      # VLAN 20 - Servers/VMs
+      - name: "DC-01"
+        type: "server"
+        role: "domain-controller"
+        vlan: 20
+        ip: "10.10.20.200"
+        port: "Fa0/4"
+        switch: "SW-01"
+        status: "active"
+        description: "Primary Domain Controller / DNS"
+
+      - name: "DC-02"
+        type: "server"
+        role: "domain-controller"
+        vlan: 20
+        ip: "10.10.20.201"
+        port: "Fa0/5"
+        switch: "SW-01"
+        status: "active"
+        description: "Secondary Domain Controller"
+
+      - name: "EXC-01"
+        type: "server"
+        role: "exchange"
+        vlan: 20
+        ip: "10.10.20.205"
+        port: "Fa0/6"
+        switch: "SW-01"
+        status: "active"
+        description: "Primary Exchange Server"
+
+      - name: "EXC-02"
+        type: "server"
+        role: "exchange"
+        vlan: 20
+        ip: "10.10.20.206"
+        port: "Fa0/7"
+        switch: "SW-01"
+        status: "active"
+        description: "Secondary Exchange Server"
+
+      - name: "FILE-01"
+        type: "server"
+        role: "fileserver"
+        vlan: 20
+        ip: "10.10.20.215"
+        port: "Fa0/15"
+        switch: "SW-01"
+        status: "active"
+        description: "Primary File Server"
+
+      - name: "FILE-02"
+        type: "server"
+        role: "fileserver"
+        vlan: 20
+        ip: "10.10.20.214"
+        port: "Fa0/14"
+        switch: "SW-01"
+        status: "active"
+        description: "Secondary File Server"
+
+      - name: "TS-01"
+        type: "server"
+        role: "terminal-server"
+        vlan: 20
+        ip: "10.10.20.219"
+        port: "Fa0/10"
+        switch: "SW-01"
+        status: "active"
+        description: "Terminal Server 01"
+
+      - name: "TS-02"
+        type: "server"
+        role: "terminal-server"
+        vlan: 20
+        ip: "10.10.20.220"
+        port: "Fa0/9"
+        switch: "SW-01"
+        status: "active"
+        description: "Terminal Server 02"
+
+      - name: "PRT-01"
+        type: "server"
+        role: "print-server"
+        vlan: 20
+        ip: "10.10.20.225"
+        port: "Fa0/8"
+        switch: "SW-01"
+        status: "active"
+        description: "Print Server"
+
+      - name: "WEB-01"
+        type: "server"
+        role: "webserver"
+        vlan: 20
+        ip: "10.10.20.230"
+        port: "Fa0/13"
+        switch: "SW-01"
+        status: "active"
+        description: "Primary Web Server"
+
+      - name: "WEB-02"
+        type: "server"
+        role: "webserver"
+        vlan: 20
+        ip: "10.10.20.231"
+        port: "Fa0/12"
+        switch: "SW-01"
+        status: "active"
+        description: "Secondary Web Server"
+
+      - name: "PRX-01"
+        type: "server"
+        role: "proxy"
+        vlan: 20
+        ip: "10.10.20.235"
+        port: "Fa0/11"
+        switch: "SW-01"
+        status: "active"
+        description: "Proxy Server"
+
+      # VLAN 30 - Backup
+      - name: "BKP-01"
+        type: "server"
+        role: "backup"
+        vlan: 30
+        ip: "10.10.30.210"
+        port: "Fa0/16"
+        switch: "SW-01"
+        status: "active"
+        description: "HQ Backup Server"
+
+      # VLAN 40 - Management
+      - name: "MGMT-01"
+        type: "management"
+        role: "monitoring"
+        vlan: 40
+        ip: "10.10.40.237"
+        port: "Fa0/17"
+        switch: "SW-01"
+        status: "active"
+        description: "Network Management Station"
+
+      # VLAN 50 - Clients (DHCP)
+      - name: "PC-01"
+        type: "client"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/20"
+        switch: "SW-01"
+        status: "active"
+        description: "Client PC"
+
+      - name: "PC-02"
+        type: "client"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/21"
+        switch: "SW-01"
+        status: "active"
+        description: "Client PC"
+
+      - name: "PC-03"
+        type: "client"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/22"
+        switch: "SW-01"
+        status: "active"
+        description: "Client PC"
+
+      - name: "PRINT-01"
+        type: "printer"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/23"
+        switch: "SW-01"
+        status: "active"
+        description: "Network Printer"
+
+      - name: "PRINT-02"
+        type: "printer"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/24"
+        switch: "SW-01"
+        status: "active"
+        description: "Network Printer"
+
+  branch:
+    name: "Branch Office"
+    location: "onprem.local"
+    description: "Remote branch office"
+
+    vlans:
+      - id: 20
+        name: "VMs"
+        subnet: "10.20.20.0/24"
+        gateway: "10.20.20.1"
+        description: "Virtual Machine Network (Branch)"
+
+      - id: 30
+        name: "Backup"
+        subnet: "10.20.30.0/24"
+        gateway: "10.20.30.1"
+        description: "Backup Infrastructure (Branch)"
+
+      - id: 50
+        name: "Clients"
+        subnet: "10.20.50.0/24"
+        gateway: "10.20.50.1"
+        description: "Client PCs and Printers (Branch)"
+        dhcp_pool:
+          start: "10.20.50.50"
+          end: "10.20.50.150"
+
+    devices:
+      # VLAN 20 - Servers
+      - name: "TS-03"
+        type: "server"
+        role: "terminal-server"
+        vlan: 20
+        ip: "10.20.20.219"
+        port: "Fa0/1"
+        switch: "SW-02"
+        status: "active"
+        description: "Branch Terminal Server 01"
+
+      - name: "TS-04"
+        type: "server"
+        role: "terminal-server"
+        vlan: 20
+        ip: "10.20.20.220"
+        port: "Fa0/2"
+        switch: "SW-02"
+        status: "active"
+        description: "Branch Terminal Server 02"
+
+      # VLAN 30 - Backup
+      - name: "BKP-02"
+        type: "server"
+        role: "backup"
+        vlan: 30
+        ip: "10.20.30.210"
+        port: "Fa0/24"
+        switch: "SW-02"
+        status: "active"
+        description: "Branch Backup Server"
+
+      # VLAN 50 - Clients (DHCP)
+      - name: "PC-04"
+        type: "client"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/5"
+        switch: "SW-02"
+        status: "active"
+        description: "Client PC"
+
+      - name: "PC-05"
+        type: "client"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/6"
+        switch: "SW-02"
+        status: "active"
+        description: "Client PC"
+
+      - name: "PC-06"
+        type: "client"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/7"
+        switch: "SW-02"
+        status: "active"
+        description: "Client PC"
+
+      - name: "PC-07"
+        type: "client"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/8"
+        switch: "SW-02"
+        status: "active"
+        description: "Client PC"
+
+      - name: "PC-08"
+        type: "client"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/9"
+        switch: "SW-02"
+        status: "active"
+        description: "Client PC"
+
+      - name: "PC-09"
+        type: "client"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/10"
+        switch: "SW-02"
+        status: "active"
+        description: "Client PC"
+
+      - name: "PC-10"
+        type: "client"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/11"
+        switch: "SW-02"
+        status: "active"
+        description: "Client PC"
+
+      - name: "PC-11"
+        type: "client"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/12"
+        switch: "SW-02"
+        status: "active"
+        description: "Client PC"
+
+      - name: "PRINT-03"
+        type: "printer"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/15"
+        switch: "SW-02"
+        status: "active"
+        description: "Network Printer"
+
+      - name: "PRINT-04"
+        type: "printer"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/16"
+        switch: "SW-02"
+        status: "active"
+        description: "Network Printer"
+
+      - name: "PRINT-05"
+        type: "printer"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/17"
+        switch: "SW-02"
+        status: "active"
+        description: "Network Printer"
+
+      - name: "PRINT-06"
+        type: "printer"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/18"
+        switch: "SW-02"
+        status: "active"
+        description: "Network Printer"
+
+      - name: "PRINT-07"
+        type: "printer"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/19"
+        switch: "SW-02"
+        status: "active"
+        description: "Network Printer"
+
+      - name: "PRINT-08"
+        type: "printer"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/20"
+        switch: "SW-02"
+        status: "active"
+        description: "Network Printer"
+
+      - name: "PRINT-09"
+        type: "printer"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/21"
+        switch: "SW-02"
+        status: "active"
+        description: "Network Printer"
+
+      - name: "PRINT-10"
+        type: "printer"
+        vlan: 50
+        ip: "dhcp"
+        port: "Fa0/22"
+        switch: "SW-02"
+        status: "active"
+        description: "Network Printer"
+
+# Infrastructure devices
+infrastructure:
+  routers:
+    - name: "RT-01"
+      site: "hq"
+      model: "Cisco 2911"
+      interfaces:
+        - name: "Gi0/0"
+          type: "trunk"
+          vlans: [10, 20, 30, 40, 50]
+        - name: "Gi0/2"
+          type: "wan"
+          ip: "192.168.100.1"
+          description: "WAN to Branch"
+
+    - name: "RT-02"
+      site: "branch"
+      model: "Cisco 2911"
+      interfaces:
+        - name: "Gi0/0"
+          type: "trunk"
+          vlans: [20, 30, 50]
+        - name: "Gi0/2"
+          type: "wan"
+          ip: "192.168.100.2"
+          description: "WAN to HQ"
+
+  switches:
+    - name: "SW-01"
+      site: "hq"
+      model: "Cisco Catalyst 2960"
+      mgmt_ip: "10.10.10.2"
+      vlans: [10, 20, 30, 40, 50]
+
+    - name: "SW-02"
+      site: "branch"
+      model: "Cisco Catalyst 2960"
+      mgmt_ip: "10.20.40.2"
+      vlans: [20, 30, 50]
+
+# Notes and metadata
+metadata:
+  version: "1.0"
+  created: "2025-11-13"
+  author: "Philipp Prinzen"
+  project: "Enterprise Network Automation Suite"
+  purpose: "IHK Fachinformatiker Abschlussprojekt"
