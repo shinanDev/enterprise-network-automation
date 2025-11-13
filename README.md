@@ -125,16 +125,16 @@ Web-based device inventory and IP address management system with automated healt
 ├── data/
 │   └── device_inventory.yaml
 ├── src/
-│   ├── scanner.py      # Ping checks & monitoring
-│   ├── manager.py      # IP management logic
-│   └── db.py           # Database operations
+│   ├── scanner.py          # Ping checks & monitoring
+│   ├── manager.py          # IP management logic
+│   └── db.py               # Database operations
 ├── templates/
-│   ├── dashboard.html  # Main UI
+│   ├── dashboard.html      # Main UI
 │   └── device_detail.html
 ├── static/
 │   ├── css/
 │   └── js/
-├── app.py              # Flask application
+├── app.py                  # Flask application
 └── requirements.txt
 ```
 
