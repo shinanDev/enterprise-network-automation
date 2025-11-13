@@ -42,18 +42,19 @@ Multi-site enterprise network designed in Cisco Packet Tracer with 41 devices ac
 
 **HQ (Headquarters):**
 - 1× Router (HQ-R1)
-- 2× Distribution Switches (HQ-SW1, HQ-SW2)
-- 6× Access Switches (HQ-SW3 to HQ-SW8)
-- 6× Servers (DC-01, DC-02, DB-01, File-01, Web-01, APP-01)
+- 1× Distribution Switches (HQ-SW-01)
+- 1× Access Switches (HQ-SW-02)
+- 6× Servers (DC-01, DC-02, EXC-01, EXC-02, DB-01, FILE-01, WEB-01, APP-01 (...))
 - 14× Client PCs
-- 5× VLANs (10: Management, 20: IT, 30: Finance, 40: HR, 50: Guest)
+- 5× VLANs (10: Hypervisor, 20: VMs, 30: Backup, 40: Management, 50: Clients)
 
 **Branch (Remote Office):**
-- 1× Router (Branch-R1)
-- 1× Distribution Switch (Branch-SW1)
-- 2× Access Switches (Branch-SW2, Branch-SW3)
-- 1× Server (Branch-DC-01)
-- 11× Client PCs
+- 1× Router (Branch-RT-01)
+- 1× Distribution Switch (Branch-SW-01)
+- 1× Access Switches (Branch-SW-02)
+- 2× Server (Branch-TS-03, Branch-TS-04)
+- 8× Client PCs (DHCP)
+- 8x Network Printer
 - 5× VLANs (same as HQ)
 
 **Routing:** OSPF between HQ and Branch
@@ -512,7 +513,7 @@ This project integrates Ethical AI principles learned during work with **Alexand
 
 ### Phase 3: IHK Main Project (Jul - Oct 2026)
 - 🎯 Tool 4: AI Network Assistant development
-- 📝 IHK documentation (15-20 pages)
+- 📝 IHK documentation
 - 🧪 Comprehensive testing & CI/CD
 - 🎤 Presentation preparation
 - 🏆 **Goal: 100% evaluation**
@@ -524,8 +525,8 @@ This project integrates Ethical AI principles learned during work with **Alexand
 
 ### Phase 5: IHK Certification (Apr - May 2027)
 - 📄 Final documentation
-- 🎤 Presentation (15 min)
-- 💬 Technical interview (20-30 min)
+- 🎤 Presentation
+- 💬 Technical interview
 - 🎓 **Target: Certified Application Developer**
 
 ---
