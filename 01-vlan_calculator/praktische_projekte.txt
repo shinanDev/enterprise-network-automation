@@ -1,0 +1,26 @@
+PRAKTISCHE PROJEKTE
+
+Projekt 1: Config-Backup-Tool
+python# Automatisches Backup aller Switch/Router-Configs
+# - SSH-Verbindung
+# - "show running-config" ausführen
+# - In Datei speichern mit Timestamp
+
+Projekt 2: IP-Management-Tool
+python# CSV mit allen Geräten
+# - Ping-Status prüfen
+# - Freie IPs anzeigen
+# - DHCP-Leases simulieren
+
+Projekt 3: VLAN-Calculator
+python# Eingabe: VLAN-ID, Standort
+# Ausgabe: Gateway, Subnet, IP-Range
+# Bonus: Prüfen ob IP bereits vergeben
+
+Projekt 4: Network-Monitoring-Dashboard
+python# Flask-Web-App
+# - Zeigt Status aller Geräte
+# - Ping-Checks alle 60 Sek
+# - Alerts bei Down-Time
+
+Diese Projekte kannst du in deinem Portfolio zeigen! 📂

@@ -1,0 +1,116 @@
+RT-02#show running-config 
+Building configuration...
+
+Current configuration : 1597 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname RT-02
+!
+!
+!
+!
+ip dhcp excluded-address 10.20.50.1 10.20.50.49
+!
+ip dhcp pool VLAN50-Branch-Clients
+ network 10.20.50.0 255.255.255.0
+ default-router 10.20.50.1
+ dns-server 10.10.20.200
+ domain-name onprem.local
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+license udi pid CISCO2911/K9 sn FTX15244203-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ description LAN-to-SW-02
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0.20
+ description Gateway-VLAN20-VMs-Branch
+ encapsulation dot1Q 20
+ ip address 10.20.20.1 255.255.255.0
+!
+interface GigabitEthernet0/0.30
+ description Gateway-VLAN30-Backup-Branch
+ encapsulation dot1Q 30
+ ip address 10.20.30.1 255.255.255.0
+!
+interface GigabitEthernet0/0.50
+ description Gateway-VLAN50-Clients-Branch
+ encapsulation dot1Q 50
+ ip address 10.20.50.1 255.255.255.0
+!
+interface GigabitEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface GigabitEthernet0/2
+ description WAN-to-HQ-RT-01
+ ip address 192.168.100.2 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ router-id 2.2.2.2
+ log-adjacency-changes
+ passive-interface GigabitEthernet0/0
+ network 10.20.20.0 0.0.0.255 area 0
+ network 10.20.50.0 0.0.0.255 area 0
+ network 192.168.100.0 0.0.0.3 area 0
+ network 10.20.30.0 0.0.0.255 area 0
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end

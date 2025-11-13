@@ -1,0 +1,29 @@
+INPUT:
+- VLAN-ID (10, 20, 30, 40, 50)
+- Standort (HQ oder Branch)
+
+OUTPUT:
+- Subnet (10.10.20.0/24)
+- Gateway (10.10.20.1)
+- Nutzbare IP-Range (10.10.20.2 - 10.10.20.254)
+- DHCP-Range (10.10.20.50 - 10.10.20.150) falls VLAN 50
+- Broadcast (10.10.20.255)
+- Anzahl nutzbare IPs (254)
+- Verwendung (Server, Clients, Backup, etc.)
+
+BONUS:
+- Prüfen ob IP bereits vergeben
+- Nächste freie IP vorschlagen
+- Export als CSV
+
+# VLAN Calculator - Dependencies
+# Python 3.11+
+
+# Aktuell nur Standard-Bibliothek benötigt:
+# - csv
+# - datetime
+
+# Für zukünftige Features:
+# pytest>=7.4.0          # Testing
+# black>=23.0.0          # Code-Formatting
+# pylint>=2.17.0         # Code-Quality
