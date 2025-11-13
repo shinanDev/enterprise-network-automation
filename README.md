@@ -44,8 +44,10 @@ Multi-site enterprise network designed in Cisco Packet Tracer with 41 devices ac
 - 1× Router (HQ-R1)
 - 1× Distribution Switches (HQ-SW-01)
 - 1× Access Switches (HQ-SW-02)
-- 6× Servers (DC-01, DC-02, EXC-01, EXC-02, DB-01, FILE-01, WEB-01, APP-01 (...))
-- 14× Client PCs
+- 2x Server (HYV-01, HYV-02)
+- 12× VMs (DC-01, DC-02, EXC-01, EXC-02, PRT-01, FILE-01, FILE-o2, WEB-01, WEB-02, APP-01, TS-01, TS-02)
+- 3× Client PCs
+- 2x Network Printer
 - 5× VLANs (10: Hypervisor, 20: VMs, 30: Backup, 40: Management, 50: Clients)
 
 **Branch (Remote Office):**
