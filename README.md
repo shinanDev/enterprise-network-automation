@@ -607,7 +607,7 @@ MIT License - See [LICENSE](LICENSE) file for details
 
 ## 🔗 Related Projects
 
-- **[FemAI Ethical AI Post Agent](https://github.com/YOUR_USERNAME/femai-post-agent)** - Production AI system for LinkedIn content generation with bias awareness
+- **[FemAI Ethical AI Post Agent](https://github.com/shinanDev/ethical_ai_post_agent)** - Production AI system for LinkedIn content generation with bias awareness
 - **[Network Design Documentation](docs/network-design.txt)** - Complete "OnPrem" topology
 
 ---
@@ -618,7 +618,7 @@ For questions, suggestions, or collaboration:
 
 - **Email:** shinan.dev@proton.me
 - **LinkedIn:** [Philipp Prinzen](https://www.linkedin.com/in/philipp-prinzen-46a51a166)
-- **GitHub Issues:** [Create an issue](https://github.com/YOUR_USERNAME/enterprise-network-automation/issues)
+- **GitHub Issues:** [Create an issue](https://github.com/shinanDev/enterprise-network-automation/issues)
 
 ---
 
