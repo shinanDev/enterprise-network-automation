@@ -57,7 +57,7 @@ def index():
 
 
 @app.route('/devices')
-def devices():
+def devices_page():
     """Device list page with filters"""
     try:
         # Get filter parameters
@@ -127,7 +127,7 @@ def add_device():
 
             if success:
                 logger.info(f"Device {device_data['name']} added successfully")
-                return redirect(url_for('devices'))
+                return redirect(url_for('devices_page'))
             else:
                 return render_template('add_device.html',
                                      sites=manager.get_all_sites(),
@@ -144,7 +144,7 @@ def add_device():
 
 
 @app.route('/free-ips')
-def free_ips():
+def free_ips_page():
     """Free IP address finder"""
     try:
         site = request.args.get('site', 'hq')
@@ -326,13 +326,13 @@ def api_export_csv():
 # ============================================================================
 
 @app.errorhandler(404)
-def not_found(error):
+def not_found(_error):
     """404 error handler"""
     return render_template('error.html', error='Page not found'), 404
 
 
 @app.errorhandler(500)
-def internal_error(error):
+def internal_error(_error):
     """500 error handler"""
     return render_template('error.html', error='Internal server error'), 500
 
